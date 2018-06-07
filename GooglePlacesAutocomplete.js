@@ -652,17 +652,22 @@ export default class GooglePlacesAutocomplete extends Component {
 
     if ((this.state.text !== '' || this.props.predefinedPlaces.length || this.props.currentLocation === true) && this.state.listViewDisplayed === true) {
       return (
-        <FlatList
-          style={[this.props.suppressDefaultStyles ? {} : defaultStyles.listView, this.props.styles.listView]}
-          data={this.state.dataSource}
-          keyExtractor={keyGenerator}
-          extraData={[this.state.dataSource, this.props]}
-          ItemSeparatorComponent={this._renderSeparator}
-          renderItem={({ item }) => this._renderRow(item)}
-          ListFooterComponent={this._renderPoweredLogo}
-          {...this.props}
-        />
+        <View style={[this.props.suppressDefaultStyles ? {} : defaultStyles.listView, this.props.styles.listView]}>
+          {
+            this.state.dataSource.map((item) => this._renderRow(item))
+          }
+        </View>
       );
+      // <FlatList
+      //   style={[this.props.suppressDefaultStyles ? {} : defaultStyles.listView, this.props.styles.listView]}
+      //   data={this.state.dataSource}
+      //   keyExtractor={keyGenerator}
+      //   extraData={[this.state.dataSource, this.props]}
+      //   ItemSeparatorComponent={this._renderSeparator}
+      //   renderItem={({ item }) => this._renderRow(item)}
+      //   ListFooterComponent={this._renderPoweredLogo}
+      //   {...this.props}
+      // />
     }
 
     return null;
